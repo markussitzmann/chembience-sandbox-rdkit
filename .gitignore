@@ -1,0 +1,9 @@
+tmp/*
+.project/*
+*.pyc
+*~
+.idea/
+static/
+media/
+.bash_history
+.python_history

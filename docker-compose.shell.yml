@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  shell:
+    image: chembience/shell:${CHEMBIENCE_BUILD_LABEL}
+    #container_name: chembience_shell
+    volumes:
+      - "${CHEMBIENCE_SPHERE}:/home/sphere"
+    networks:
+      - sphere
+    environment:
+      - CHEMBIENCE_BUILD_LABEL
+      - CHEMBIENCE_UID
+      - CHEMBIENCE_GID
+    command: bash
+    entrypoint: [""]
+
+networks:
+  sphere:
+
+
+
