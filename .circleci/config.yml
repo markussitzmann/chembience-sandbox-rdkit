@@ -33,7 +33,7 @@ jobs:
 
 workflows:
   version: 2
-  chembience-compile-build:
+  chembience-rdkit-build:
     jobs:
       - prepare
       - sandbox-rdkit:
