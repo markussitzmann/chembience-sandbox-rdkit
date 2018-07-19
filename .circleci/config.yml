@@ -24,9 +24,9 @@ jobs:
           working_directory: .
           command: |
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker-compose -f ./context/base/docker-compose.build.yml pull --ignore-pull-failures
-            docker-compose -f ./context/base/docker-compose.build.yml build
-            docker-compose -f ./context/base/docker-compose.build.yml push
+            docker-compose -f docker-compose.build.yml pull --ignore-pull-failures
+            docker-compose -f docker-compose.build.yml build
+            docker-compose -f docker-compose.build.yml push
 
 
 workflows:
