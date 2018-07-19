@@ -12,7 +12,6 @@ jobs:
           working_directory: .
           command: |
             docker system prune -f --volumes
-            ./docker/rm-all-images
             ./env-prepare
   sandbox-rdkit:
     machine:

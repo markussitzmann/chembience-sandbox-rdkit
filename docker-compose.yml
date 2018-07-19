@@ -47,8 +47,24 @@ services:
       - REPLICATION_PASS=
       - REPLICATION_SSLMODE=
 
+
+  job-management:
+    image: rabbitmq:3-management
+    container_name: job-management
+    ports:
+      - "15672:15672"
+    networks:
+      - sphere
+    volumes:
+      - job_management:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=Rabbitmq0
+
+
 volumes:
   db_volume:
+  job_management:
 
 networks:
   sphere:
