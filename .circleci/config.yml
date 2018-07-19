@@ -1,0 +1,45 @@
+version: 2
+
+jobs:
+  prepare:
+    machine:
+      image: circleci/classic:201711-01
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: Prepare
+          working_directory: .
+          command: |
+            docker system prune -f --volumes
+            ./docker/rm-all-images
+            ./env-prepare
+  sandbox-rdkit:
+    machine:
+      image: circleci/classic:201711-01
+      docker_layer_caching: true
+    steps:
+      - checkout
+      - run:
+          name: Build sandbox rdkit
+          working_directory: .
+          command: |
+            ./env-prepare
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker-compose -f ./context/base/docker-compose.build.yml pull --ignore-pull-failures
+            docker-compose -f ./context/base/docker-compose.build.yml build
+            docker-compose -f ./context/base/docker-compose.build.yml push
+
+
+workflows:
+  version: 2
+  chembience-compile-build:
+    jobs:
+      - prepare
+      - sandbox-rdkit:
+          requires:
+            - prepare
+
+
+
+
