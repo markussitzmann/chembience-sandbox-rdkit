@@ -13,9 +13,14 @@ for mol in suppl:
     i += 1
     if mol:
         try:
-            smol = s.standardize(mol)
+            if mol.GetNumAtoms() < 100:
+                smol = s.standardize(mol)
+                tmol = s.tautomer_parent(smol, True)
+            else:
+                smol = mol
+                tmol = mol
             print(str(i) + ":" + str(mol.GetNumAtoms()) + ":" + Chem.MolToSmiles(smol))
-            tmol = s.tautomer_parent(smol, True)
+
             print(str(i) + ":" + str(mol.GetNumAtoms()) + ":" + Chem.MolToSmiles(tmol))
         except Exception as e:
             print(e)

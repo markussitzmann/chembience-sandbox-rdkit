@@ -12,7 +12,7 @@ jobs:
           working_directory: .
           command: |
             docker system prune -f --volumes
-            ./env-prepare
+
   sandbox-rdkit:
     machine:
       image: circleci/classic:201711-01
@@ -23,7 +23,6 @@ jobs:
           name: Build sandbox rdkit
           working_directory: .
           command: |
-            ./env-prepare
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker-compose -f ./context/base/docker-compose.build.yml pull --ignore-pull-failures
             docker-compose -f ./context/base/docker-compose.build.yml build
